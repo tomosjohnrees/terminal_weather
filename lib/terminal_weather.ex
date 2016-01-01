@@ -12,7 +12,10 @@ defmodule TerminalWeather do
     weather = postcode
     |> PostCode.to_longitude_latitude
     |> Weather.current_weather
-    IO.inspect weather
+
+    current_temp = weather["temp"] |> Kelvin.to_celcius |> round
+    
+    IO.puts "You lazy bastard. It's #{current_temp}°C outside!"
   end
 
   defp parse_args(args) do
