@@ -1,19 +1,12 @@
-# TerminalWeather
+# Terminal Weather
 
-**TODO: Add description**
+For those moments where you can't be arsed to open a window.
 
-## Installation
+## Getting started
+`$ mix deps.get`
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+`$ mix escript.build `
 
-  1. Add terminal_weather to your list of dependencies in `mix.exs`:
+`$ ./terminal_weather --postcode=YOUR_POSTCODE_HERE`
 
-        def deps do
-          [{:terminal_weather, "~> 0.0.1"}]
-        end
 
-  2. Ensure terminal_weather is started before your application:
-
-        def application do
-          [applications: [:terminal_weather]]
-        end

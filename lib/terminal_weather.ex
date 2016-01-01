@@ -9,8 +9,10 @@ defmodule TerminalWeather do
   end
 
   def process([postcode: postcode]) do
-    postcode
+    weather = postcode
     |> PostCode.to_longitude_latitude
+    |> Weather.current_weather
+    IO.inspect weather
   end
 
   defp parse_args(args) do
