@@ -15,7 +15,7 @@ defmodule TerminalWeather do
   def process([postcode: postcode]) do
     weather = postcode
     |> PostCode.to_longitude_latitude
-    |> Weather.weather
+    |> Weather.method(:weather)
 
     current_temp = weather["temp"] |> Kelvin.to_celsius |> round
 

@@ -1,18 +1,15 @@
 defmodule Weather do
-  def weather([longitude: longitude, latitude: latitude]) do
-    "http://api.openweathermap.org/data/2.5/weather?" <>
-    "lat=" <> latitude <>
-    "&lon=" <> longitude <>
-    "&appid=2de143494c0b295cca9337e1e96b00e0"
-    |> api_call(:weather)
+  def method([longitude: longitude, latitude: latitude], method_name) do
+    url(longitude, latitude, method_name)
+    |> api_call(method_name)
   end
 
-  def forecast([longitude: longitude, latitude: latitude]) do
-    "http://api.openweathermap.org/data/2.5/forecast?" <>
+  def url(longitude, latitude, method_name) do
+    "http://api.openweathermap.org/data/2.5/" <>
+    "#{ method_name |> to_string }?" <>
     "lat=" <> latitude <>
     "&lon=" <> longitude <>
     "&appid=2de143494c0b295cca9337e1e96b00e0"
-    |> api_call(:forecast)
   end
 
   defp api_call(url, method_name) do
@@ -22,16 +19,17 @@ defmodule Weather do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body |> process_response_body(method_name)
       {:ok, %HTTPoison.Response{status_code: 404}} ->
-        IO.puts "The #{method_name} API doesn't seem to be working"
+        IO.puts "The #{method_name |> to_string }" <>
+        "API doesn't seem to be working"
       {:error, %HTTPoison.Error{reason: reason}} ->
         IO.inspect reason
     end
   end
 
-  defp process_response_body(body,api) do
+  defp process_response_body(body, method_name) do
     body
     |> Poison.decode! 
-    |> extract_data(api)
+    |> extract_data(method_name)
   end
 
   defp extract_data(response, :weather) do
