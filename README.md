@@ -9,4 +9,8 @@ For those moments where you can't be arsed to open a window.
 
 `$ ./terminal_weather --postcode=YOUR_POSTCODE_HERE`
 
+**e.g.**
+
+`$ ./terminal_weather --postcode=ls42pj --api=weather`
+
 

@@ -36,6 +36,5 @@ defmodule Weather do
     response["main"]
   end
   defp extract_data(response, :forecast) do
-    # TODO see which data needs extracting
   end
 end
