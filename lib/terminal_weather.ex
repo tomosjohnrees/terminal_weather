@@ -3,15 +3,9 @@ defmodule TerminalWeather do
     args |> parse_args |> process
   end
 
-  defp process([]) do
-    IO.puts "Please provide a post code"
-    IO.puts "e.g. $ ./terminal_weather --post_code=CF446YP"
-  end
-
-  defp process([postcode: "LS118BU"]) do
+  defp process([postcode: "LS118BU", api: _]) do
     IO.puts "Not on my watch!"
   end
-
   defp process([postcode: postcode, api: method_name]) do
     method_name = method_name |> String.to_atom
     case method_name do
@@ -20,7 +14,11 @@ defmodule TerminalWeather do
         "been implemented as a type yet"
     end
   end
-  
+  defp process(_) do
+    IO.puts "invalid input"
+    IO.puts "e.g. \n$ ./terminal_weather --postcode=ls42pj --api=weather"
+  end
+
   defp method(postcode, method_name) do
     postcode
     |> PostCode.to_longitude_latitude

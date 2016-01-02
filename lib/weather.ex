@@ -4,7 +4,7 @@ defmodule Weather do
     |> api_call(method_name)
   end
 
-  def url(longitude, latitude, method_name) do
+  defp url(longitude, latitude, method_name) do
     "http://api.openweathermap.org/data/2.5/" <>
     "#{ method_name |> to_string }?" <>
     "lat=" <> latitude <>
