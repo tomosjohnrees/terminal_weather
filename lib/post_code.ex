@@ -19,16 +19,14 @@ defmodule PostCode do
   end
 
   defp extract_longitude_latitude(response) do
-    longitude = response |> longitude |> to_string
-    latitude = response |> latitude |> to_string
-    [ longitude: longitude, latitude: latitude ]
+    [response |> longitude, response |> latitude]
   end
 
   defp longitude(response) do
-    response["result"]["longitude"]
+    response["result"]["longitude"] |> to_string
   end
 
   defp latitude(response) do
-    response["result"]["latitude"]
+    response["result"]["latitude"] |> to_string
   end
 end
